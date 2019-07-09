@@ -51,5 +51,21 @@ describe SortJobDependencies do
 			expect(sort_job_dependencies.sort_jobs(string_of_jobs).size).to eq(3)
 		end
 	end
+
+	context "given a sequence of three jobs with 1 dependency \"a =>\", \"b => c\", \"c =>\"" do
+		let(:string_of_jobs) { "a => , b => c, c => " }
+
+		it "returns \"acb\"" do
+			expect(sort_job_dependencies.sort_jobs(string_of_jobs)).to eq("acb")
+		end
+
+		it "is an object of type String" do
+			expect(string_of_jobs).to be_a(String)
+		end
+
+		it "should equal 3 jobs" do
+			expect(sort_job_dependencies.sort_jobs(string_of_jobs).size).to eq(3)
+		end
+	end
   end
 end
