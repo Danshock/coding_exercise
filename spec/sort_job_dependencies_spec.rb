@@ -99,6 +99,7 @@ describe SortJobDependencies do
 	context "given a sequence of six jobs with a circular dependency \"a => , b => c, c => f, d => a, e => , f => b\"" do
 		let(:string_of_jobs) { "a => , b => c, c => f, d => a, e => , f => b" }
 
+		# TSort comes with 
 		it "raises an error: Circular Dependencies are not allowed. Please correct your dependencies." do
 			expect{sort_job_dependencies.sort_jobs(string_of_jobs)}.to raise_error(TSort::Cyclic)
 		end
