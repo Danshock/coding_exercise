@@ -95,5 +95,17 @@ describe SortJobDependencies do
 			expect(string_of_jobs).to be_a(String)
 		end
 	end
+
+	context "given a sequence of six jobs with a circular dependency \"a => , b => c, c => f, d => a, e => , f => b\"" do
+		let(:string_of_jobs) { "a => , b => c, c => f, d => a, e => , f => b" }
+
+		it "raises an error: Circular Dependencies are not allowed. Please correct your dependencies." do
+			expect{sort_job_dependencies.sort_jobs(string_of_jobs)}.to raise_error(TSort::Cyclic)
+		end
+
+		it "is an object of type String" do
+			expect(string_of_jobs).to be_a(String)
+		end
+	end
   end
 end
