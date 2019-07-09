@@ -52,7 +52,7 @@ describe SortJobDependencies do
 		end
 	end
 
-	context "given a sequence of three jobs with 1 dependency \"a =>\", \"b => c\", \"c =>\"" do
+	context "given a sequence of three jobs with one dependency \"a =>\", \"b => c\", \"c =>\"" do
 		let(:string_of_jobs) { "a => , b => c, c => " }
 
 		it "returns \"acb\"" do
@@ -65,6 +65,22 @@ describe SortJobDependencies do
 
 		it "should equal 3 jobs" do
 			expect(sort_job_dependencies.sort_jobs(string_of_jobs).size).to eq(3)
+		end
+	end
+
+	context "given a sequence of six jobs with four dependencies \"a => , b => c, c => f, d => a, e => b, f =>\"" do
+		let(:string_of_jobs) { "a => , b => c, c => f, d => a, e => b, f => " }
+
+		it "returns \"afcbde\"" do
+			expect(sort_job_dependencies.sort_jobs(string_of_jobs)).to eq("afcbde")
+		end
+
+		it "is an object of type String" do
+			expect(string_of_jobs).to be_a(String)
+		end
+
+		it "should equal 6 jobs" do
+			expect(sort_job_dependencies.sort_jobs(string_of_jobs).size).to eq(6)
 		end
 	end
   end
