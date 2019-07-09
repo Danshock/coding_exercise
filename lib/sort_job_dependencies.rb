@@ -3,11 +3,6 @@ require "tsort"
 class SortJobDependencies
 	include TSort
 
-	def self_dependency_error(job_error)
-		raise "Job #{job_error} cannot depend on self."
-	end
-
-	# initialize with a default value = []
 	def initialize
 		@dependencies = Hash.new { |job, dep| job[dep] = [] }
 	end

@@ -7,7 +7,9 @@ Download or clone the repo
 
     $ git clone https://github.com/Danshock/coding_exercise.git
 
-cd into the directory
+cd into the directory and run:
+
+    $ bundle exec rspec
 
 Open Terminal / iTerm2 / etc and run:
 
