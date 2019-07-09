@@ -83,5 +83,17 @@ describe SortJobDependencies do
 			expect(sort_job_dependencies.sort_jobs(string_of_jobs).size).to eq(6)
 		end
 	end
+
+	context "given a sequence of three jobs with a job depending on self \"a => , b => , c => c\"" do
+		let(:string_of_jobs) { "a => , b => , c => c" }
+
+		it "raises an error: Jobs cannot depend on themselves." do
+			expect{sort_job_dependencies.sort_jobs(string_of_jobs)}.to raise_error(RuntimeError, "Jobs cannot depend on themselves.")
+		end
+
+		it "is an object of type String" do
+			expect(string_of_jobs).to be_a(String)
+		end
+	end
   end
 end
