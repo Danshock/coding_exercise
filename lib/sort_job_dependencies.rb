@@ -3,8 +3,8 @@ require "tsort"
 class SortJobDependencies
 	include TSort
 
-	def self_dependency_error(k)
-		raise "Jobs cannot depend on themselves."
+	def self_dependency_error(job_error)
+		raise "Job #{job_error} cannot depend on self."
 	end
 
 	# initialize with a default value = []
@@ -17,7 +17,7 @@ class SortJobDependencies
 		tsort.join
 	end
 
-	private
+private
 
 	def add_job_dependency(job, *job_dependencies)
 		@dependencies[job] = job_dependencies
@@ -25,19 +25,21 @@ class SortJobDependencies
 
 	def jobs_splitter(unsorted_job_dependencies)
 		sorted_job_dds = unsorted_job_dependencies.split(", ")
-		  sorted_job_dds.each do |s|
-			  k, v = s.split(" => ")
-			    if k === v
-				  raise self_dependency_error(k)
-			    elsif v === nil
-				  add_job_dependency(k)
+		  
+		  sorted_job_dds.each do |jobs_string|
+			  job, dependency = jobs_string.split(" => ")
+			    
+			    if job === dependency
+				  raise "Job #{job} cannot depend on self."
+			    elsif dependency === nil
+				  add_job_dependency(job)
 			    else
-				  add_job_dependency(k, v)
+				  add_job_dependency(job, dependency)
 			    end				
 		  end
 	end
 
-	# The below two methods are required in order for TSort to work
+	# The two methods below are required in order for TSort to work
 	def tsort_each_node(&block)
 		@dependencies.each_key(&block)
 	end
@@ -45,5 +47,4 @@ class SortJobDependencies
 	def tsort_each_child(job, &block)
 		@dependencies[job].each(&block) if @dependencies.has_key?(job)	
 	end
-
 end

@@ -1,5 +1,27 @@
-# Sort Job Dependencies - My solution to the coding exercise
+## Sort Job Dependencies 
+My solution to the coding exercise
 
+# Installation
+
+Download or clone the repo
+
+    $ git clone https://github.com/Danshock/coding_exercise.git
+
+cd into the directory
+
+Open Terminal / iTerm2 / etc and run:
+
+    $ irb -r ./lib/sort_job_dependencies.rb
+
+Initialize a new SortJobDependencies object
+
+    $ class_instance = SortJobDependencies.new
+
+Run the ```sort_jobs()``` method on the SortJobDependencies object with the jobs you want to sort:
+
+    $ class_instance.sort_jobs("a => , b => c, c => ") => acb
+    $ class_instance.sort_jobs("a => , b => c, c => f, d => a, e => b, f => ") => afcbde
+    $ class_instance.sort_jobs(" a => , b => , c => c") => RuntimeError (Job c cannot depend on self.)
 
 
 ## Coding exercise

@@ -30,10 +30,6 @@ describe SortJobDependencies do
 		it "should equal 1 job" do
 			expect(string_of_jobs.size).to eq(1)
 		end
-
-		it "is an object of type String" do
-			expect(string_of_jobs).to be_a(String)
-		end
 	end
 
 	context "given a sequence of three jobs \"a =>\", \"b =>\", \"c =>\"" do
@@ -41,10 +37,6 @@ describe SortJobDependencies do
 
 		it "returns \"abc\"" do
 			expect(sort_job_dependencies.sort_jobs(string_of_jobs)).to eq("abc")
-		end
-
-		it "is an object of type String" do
-			expect(string_of_jobs).to be_a(String)
 		end
 
 		it "should equal 3 jobs" do
@@ -59,10 +51,6 @@ describe SortJobDependencies do
 			expect(sort_job_dependencies.sort_jobs(string_of_jobs)).to eq("acb")
 		end
 
-		it "is an object of type String" do
-			expect(string_of_jobs).to be_a(String)
-		end
-
 		it "should equal 3 jobs" do
 			expect(sort_job_dependencies.sort_jobs(string_of_jobs).size).to eq(3)
 		end
@@ -75,10 +63,6 @@ describe SortJobDependencies do
 			expect(sort_job_dependencies.sort_jobs(string_of_jobs)).to eq("afcbde")
 		end
 
-		it "is an object of type String" do
-			expect(string_of_jobs).to be_a(String)
-		end
-
 		it "should equal 6 jobs" do
 			expect(sort_job_dependencies.sort_jobs(string_of_jobs).size).to eq(6)
 		end
@@ -87,25 +71,16 @@ describe SortJobDependencies do
 	context "given a sequence of three jobs with a job depending on self \"a => , b => , c => c\"" do
 		let(:string_of_jobs) { "a => , b => , c => c" }
 
-		it "raises an error: Jobs cannot depend on themselves." do
-			expect{sort_job_dependencies.sort_jobs(string_of_jobs)}.to raise_error(RuntimeError, "Jobs cannot depend on themselves.")
-		end
-
-		it "is an object of type String" do
-			expect(string_of_jobs).to be_a(String)
+		it "raises an error: Job c cannot depend on self." do
+			expect{sort_job_dependencies.sort_jobs(string_of_jobs)}.to raise_error(RuntimeError, "Job c cannot depend on self.")
 		end
 	end
 
 	context "given a sequence of six jobs with a circular dependency \"a => , b => c, c => f, d => a, e => , f => b\"" do
 		let(:string_of_jobs) { "a => , b => c, c => f, d => a, e => , f => b" }
-
-		# TSort comes with 
+ 
 		it "raises an error: Circular Dependencies are not allowed. Please correct your dependencies." do
 			expect{sort_job_dependencies.sort_jobs(string_of_jobs)}.to raise_error(TSort::Cyclic)
-		end
-
-		it "is an object of type String" do
-			expect(string_of_jobs).to be_a(String)
 		end
 	end
   end
