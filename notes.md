@@ -20,7 +20,7 @@ For the jobs_splitter method I renamed some of the variables to be more descript
 
 When refactoring the RSpec file, I removed the tests (apart from the first) which tests if the variable I set (string_of_jobs) in the test is a string. I don't consider it to be valuable considering it doesn't actually confirm what would happen if I get an input that wasn't a string.
 
-Raising a RunTimeError will break/quit the application on the first job that depends on itself. If there were several jobs that depend on themselves, I would need to run the application each time to see how many there were and fix them on by one. Instead of raising right away, I could have collected all the jobs that depend on themselves and then raise at the end listing out which ones are dependent on themselves.
+Raising a RunTimeError will break/quit the application on the first job that depends on itself. If there were several jobs that depend on themselves, I would need to run the application each time to see how many there are and fix them one by one. Instead of raising right away, I could have collected all the jobs that depend on themselves and then raise at the end listing out which ones are dependent on themselves.
 
 I also have considered rolling out a custom exception but didn't have enough information to decide if it was worth it. If there was information regarding some custom behaviour, then I would create a custom exception. As of now, in my opinion, I think the method is pretty clear at what it does. 
 
