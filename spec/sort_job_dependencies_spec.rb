@@ -5,7 +5,7 @@ describe SortJobDependencies do
 	let(:sort_job_dependencies) { SortJobDependencies.new }
 
 	context "given an empty string" do
-		let(:string_of_jobs) { "" }
+	  let(:string_of_jobs) { "" }
 
 		it "should equal 0 jobs" do
 			expect(string_of_jobs.size).to eql(0)
@@ -21,7 +21,7 @@ describe SortJobDependencies do
 	end
 
 	context "given the single job \"a =>\"" do
-		let(:string_of_jobs) { "a" }
+	  let(:string_of_jobs) { "a" }
 
 		it "returns \"a\"" do
 			expect(sort_job_dependencies.sort_jobs(string_of_jobs)).to eq("a")
@@ -33,7 +33,7 @@ describe SortJobDependencies do
 	end
 
 	context "given a sequence of three jobs \"a =>\", \"b =>\", \"c =>\"" do
-		let(:string_of_jobs) { "a => , b => , c => " }
+	  let(:string_of_jobs) { "a => , b => , c => " }
 
 		it "returns \"abc\"" do
 			expect(sort_job_dependencies.sort_jobs(string_of_jobs)).to eq("abc")
@@ -45,7 +45,7 @@ describe SortJobDependencies do
 	end
 
 	context "given a sequence of three jobs with one dependency \"a =>\", \"b => c\", \"c =>\"" do
-		let(:string_of_jobs) { "a => , b => c, c => " }
+	  let(:string_of_jobs) { "a => , b => c, c => " }
 
 		it "returns \"acb\"" do
 			expect(sort_job_dependencies.sort_jobs(string_of_jobs)).to eq("acb")
@@ -57,7 +57,7 @@ describe SortJobDependencies do
 	end
 
 	context "given a sequence of six jobs with four dependencies \"a => , b => c, c => f, d => a, e => b, f =>\"" do
-		let(:string_of_jobs) { "a => , b => c, c => f, d => a, e => b, f => " }
+	  let(:string_of_jobs) { "a => , b => c, c => f, d => a, e => b, f => " }
 
 		it "returns \"afcbde\"" do
 			expect(sort_job_dependencies.sort_jobs(string_of_jobs)).to eq("afcbde")
@@ -69,7 +69,7 @@ describe SortJobDependencies do
 	end
 
 	context "given a sequence of three jobs with a job depending on self \"a => , b => , c => c\"" do
-		let(:string_of_jobs) { "a => , b => , c => c" }
+	  let(:string_of_jobs) { "a => , b => , c => c" }
 
 		it "raises an error: Job c cannot depend on self." do
 			expect{sort_job_dependencies.sort_jobs(string_of_jobs)}.to raise_error(RuntimeError, "Job c cannot depend on self.")
@@ -77,7 +77,7 @@ describe SortJobDependencies do
 	end
 
 	context "given a sequence of six jobs with a circular dependency \"a => , b => c, c => f, d => a, e => , f => b\"" do
-		let(:string_of_jobs) { "a => , b => c, c => f, d => a, e => , f => b" }
+	  let(:string_of_jobs) { "a => , b => c, c => f, d => a, e => , f => b" }
  
 		it "raises an error: Circular Dependencies are not allowed. Please correct your dependencies." do
 			expect{sort_job_dependencies.sort_jobs(string_of_jobs)}.to raise_error(TSort::Cyclic)
