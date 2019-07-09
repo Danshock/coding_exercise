@@ -14,8 +14,6 @@ I used the TDD approach. Building the tests first, making them fail, afterwards 
 
 Once the assignment was completed, I went back to refactor the code. I noticed that in my sort_jobs method I had some duplication with creating an instance method. It was not needed as I do create a SortJobDependency object from my tests and then call a method that creates one.
 
-Also, for the self_dependency_error method I renamed the argument to be more descriptive and also the error which is raised to show exactly which job is depending on itself and causing the problem. 
-
 For the jobs_splitter method I renamed some of the variables to be more descriptive and also fixed lines where I had more than two spaces for indentation.
 
 # Considerations
