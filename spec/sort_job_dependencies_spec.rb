@@ -2,7 +2,7 @@ require "sort_job_dependencies"
 
 describe SortJobDependencies do
   describe ".sort_jobs" do
-	let(:sort_job_dependencies) { SortJobDependencies.new }
+    let(:sort_job_dependencies) { SortJobDependencies.new }
 
 	context "given an empty string" do
 	  let(:string_of_jobs) { "" }
